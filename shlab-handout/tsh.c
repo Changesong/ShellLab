@@ -277,7 +277,7 @@ int builtin_cmd(char **argv)
     if(strcmp(argv[0], "quit") == 0) {
         exit(0);
     }
-    else if(strcmp(argv[0], "fg") == 0 || strcmp(argv[0], "bg" == 0)) {  
+    else if(strcmp(argv[0], "fg") == 0 || strcmp(argv[0], "bg") == 0) {  
         do_bgfg(argv);  
         return 1;  
     }
@@ -300,7 +300,7 @@ int builtin_cmd(char **argv)
 void do_bgfg(char **argv) 
 {
     int is_bg;
-    struct job_t target_job;
+    struct job_t* target_job;
 
     if(strcmp(argv[0], "fg") == 0){
         is_bg = 0;
@@ -414,7 +414,7 @@ void sigchld_handler(int sig)
  */
 void sigint_handler(int sig) 
 {
-    pid_t pid
+    pid_t pid;
     
     pid = fgpid(jobs);
     if (pid == 0) {
